@@ -34,16 +34,34 @@
     
 ```
 
-用户信息. 图片的提交
+## form中img的单独提交提交
 
-1. 首先获取file表单控件 
-2. 为其注册change事件(当有文件上传的时候触发)，
-3. 创建上传表单对象， 专门用来做ajax的二进制文件上传
-4. 将用户选择的图像文件添加到上传表单对象中
-5. 发送头像上传的请求
-  6.这里需要配置两个属性  
-  processData: false, // jQuery不要去处理发送的数据
-  contentType: false, // jQuery不要去设置Content-Type请求头
-6. 将上传的头像显示在页面中
-7. 最后将头像的地址储存在 隐藏域中
+<script type="text/javascript">
+// 获取文件上传控件
+    var upfile = $('#upfile');// #upfile 是file表单控件的id
+// 当用户选择文件的时候 为控件添加change事件
+    upfile.on('change', function () {
+        // console.log(this.files[0]);
+        // 创建上传表单对象 专门用来做ajax的二进制文件上传
+        var formData = new FormData(); // （）里也可以传递参数
+        // 将用户选择的图像文件添加到上传表单对象中
+        formData.append('avatar', this.files[0]);
+        // 发送头像上传的请求
+        $.ajax({
+            url: '/admin/upload',
+            type: 'post',
+            data: formData,
+            processData: false, // jQuery不要去处理发送的数据
+            contentType: false, // jQuery不要去设置Content-Type请求头
+            success: function (response) {
+                if (response.success) {
+                    // 将上传的头像显示在页面中
+                    $('#preview').attr('src', response.path);
+                    // 将头像的地址存储在隐藏域中
+                    $('#avatar').val(response.path);
+                }
+            }
+        })
+    });
+</script>
 
