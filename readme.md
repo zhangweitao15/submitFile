@@ -36,9 +36,10 @@
 
 ## form中img的单独提交提交
 
+```js
 <script type="text/javascript">
 // 获取文件上传控件
-    var upfile = $('#upfile');// #upfile 是file表单控件的id
+   s var upfile = $('#upfile');// #upfile 是file表单控件的id
 // 当用户选择文件的时候 为控件添加change事件
     upfile.on('change', function () {
         // console.log(this.files[0]);
@@ -64,4 +65,6 @@
         })
     });
 </script>
+```
+
 
