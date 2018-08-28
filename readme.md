@@ -44,7 +44,7 @@
     upfile.on('change', function () {
         // console.log(this.files[0]);
         // 创建上传表单对象 专门用来做ajax的二进制文件上传
-        var formData = new FormData(); // （）里也可以传递参数
+        var formData = new FormData(); // 
         // 将用户选择的图像文件添加到上传表单对象中
         formData.append('avatar', this.files[0]);
         // 发送头像上传的请求
